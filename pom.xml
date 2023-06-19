@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- tag::allButSelenium[] -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
@@ -8,12 +7,12 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.5.3</version>   <!--1-->
+    <version>2.5.3</version>
     <relativePath />
   </parent>
   <groupId>sia</groupId>
   <artifactId>taco-cloud</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.2-SNAPSHOT</version>
   <name>taco-cloud</name>
   <description>Taco Cloud Example</description>
 
@@ -22,10 +21,12 @@
   </properties>
 
   <dependencies>
-    <dependency>                                             <!--2-->
+    <!-- tag::thymeleafStarter[] -->
+    <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-thymeleaf</artifactId>
     </dependency>
+    <!-- end::thymeleafStarter[] -->
 
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -51,7 +52,6 @@
       </exclusions>
     </dependency>
 
-<!-- end::allButSelenium[] -->
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-java</artifactId>
@@ -63,22 +63,50 @@
       <artifactId>htmlunit-driver</artifactId>
       <scope>test</scope>
     </dependency>
+
     <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>1.18.24</version>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
-    <!-- tag::allButSelenium[] -->
+
+    <!-- tag::lombokDependency[] -->
+    <dependency>
+    	<groupId>org.projectlombok</groupId>
+    	<artifactId>lombok</artifactId>
+    </dependency>
+    <!-- end::lombokDependency[] -->
+
+    <!-- tag::validationStarter[] -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-validation</artifactId>
+    </dependency>
+      <dependency>
+          <groupId>jakarta.validation</groupId>
+          <artifactId>jakarta.validation-api</artifactId>
+          <version>2.0.2</version>
+      </dependency>
+      <!-- end::validationStarter[] -->
   </dependencies>
 
+  <!-- tag::excludeLombok[] -->
   <build>
     <plugins>
-      <plugin>                                               <!--3-->
+      <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <excludes>
+            <exclude>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+            </exclude>
+          </excludes>
+        </configuration>
       </plugin>
     </plugins>
   </build>
+  <!-- end::excludeLombok[] -->
 
   <repositories>
     <repository>
@@ -96,7 +124,3 @@
   </pluginRepositories>
 
 </project>
-<!-- end::allButSelenium[] -->
-
-
-
